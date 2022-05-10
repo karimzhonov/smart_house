@@ -9,3 +9,5 @@ class Bulb(BaseDevice):
         self.status = "off"
         self.device_type = "bulb"
 
+    def _generate_data(self):
+        return {"status": self.status}

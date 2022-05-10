@@ -18,7 +18,7 @@ class DimmerBulb(Bulb):
             if msg_dict['settings'].get('intensity', None) is not None:
                 self.intensity = msg_dict['settings']['intensity']
 
-    def __generate_data(self):
+    def _generate_data(self):
         """ сгенерировать данные устройства """
         return {"status": self.status,
                 "intensity": self.intensity}

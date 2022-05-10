@@ -69,21 +69,21 @@ class BaseDevice:
 
     def send_data(self, producer):
         """ подготовить и отправить данные в kafka """
-        data = self.__generate_data()
-        info = self.__generate_info()
-        msg = self.__generate_msg(data, info)
-        self.__kafka_send(msg, producer)
+        data = self._generate_data()
+        info = self._generate_info()
+        msg = self._generate_msg(data, info)
+        self._kafka_send(msg, producer)
 
-    def __generate_data(self):
+    def _generate_data(self):
         """ сгенерировать данные устройства """
         return {"status": self.status}
 
-    def __generate_info(self):
+    def _generate_info(self):
         """ сгенерировать инфо данные устройства """
         return {"room": self.dev_params.get("room", "none"),
                 "floor": self.dev_params.get("floor", 0)}
 
-    def __generate_msg(self, data, info):
+    def _generate_msg(self, data, info):
         """ сгенерировать сообщение """
         return json.dumps(OrderedDict({
             "dt": datetime.now().strftime("%Y.%m.%d %H:%M:%S.%f")[:-3],
@@ -97,7 +97,7 @@ class BaseDevice:
             "info": info
         }))
 
-    def __kafka_send(self, msg, producer: Producer):
+    def _kafka_send(self, msg, producer: Producer):
         """ отправка сообщения в kafka """
         producer.send(value=msg.encode('utf-8')).add_errback(self.error_callback)
         producer.flush()

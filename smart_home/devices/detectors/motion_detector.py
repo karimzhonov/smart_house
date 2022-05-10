@@ -18,6 +18,6 @@ class MotionDetector(BaseDevice):
             if msg_dict['settings'].get('motion_signal', None) is not None:
                 self.motion_signal = msg_dict['settings']['motion_signal']
 
-    def __generate_data(self):
+    def _generate_data(self):
         """ сгенерировать данные устройства """
         return {"motion_signal": self.motion_signal}

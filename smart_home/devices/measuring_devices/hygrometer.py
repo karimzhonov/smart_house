@@ -15,6 +15,6 @@ class Hygrometer(BaseDevice):
             if msg_dict['settings'].get("period", None) is not None:
                 self.dev_params['period'] = msg_dict['settings']['period']
 
-    def __generate_data(self):
+    def _generate_data(self):
         """ сгенерировать данные устройства """
         return {"humidity": 70 + round(20 * random(), 1)}

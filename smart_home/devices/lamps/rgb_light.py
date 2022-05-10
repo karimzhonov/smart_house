@@ -24,7 +24,7 @@ class RGBLight(Bulb):
             if msg_dict['settings'].get('blue_intensity', None) is not None:
                 self.blue_intensity = msg_dict['settings']['blue_intensity']
 
-    def __generate_data(self):
+    def _generate_data(self):
         """ сгенерировать данные устройства """
         return {"status": self.status,
                 "red_intensity": self.red_intensity,

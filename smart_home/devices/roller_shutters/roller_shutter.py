@@ -25,7 +25,7 @@ class RollerShutter(BaseDevice):
             if msg_dict['settings'].get('bottom_point', None) is not None:
                 self.top_point = msg_dict['settings']['bottom_point']
 
-    def __generate_data(self):
+    def _generate_data(self):
         """ сгенерировать данные устройства """
         return {"status": self.status,
                 "top_point": self.top_point,

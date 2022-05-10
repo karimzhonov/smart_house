@@ -18,7 +18,7 @@ class LeakSensor(BaseDevice):
             if msg_dict['settings'].get('signal', None) is not None:
                 self.signal = msg_dict['settings']['signal']
 
-    def __generate_data(self):
+    def _generate_data(self):
         """ сгенерировать данные устройства """
         return {"status": self.status,
                 "leak_sensor_signal": self.signal}

@@ -9,12 +9,11 @@ from smart_home.devices.floor_heatings import FloorHeating
 from smart_home.devices.electric_points import ElectricPoint
 from smart_home.devices.lamps import Bulb, RGBLight, DimmerBulb
 from smart_home.devices.measuring_devices import Thermometer, Barometer, Hygrometer
-
+from config_local import *
 
 if __name__ == '__main__':
     # параметры kafka
-    kafka_params = {"bootstrap_servers": "164.92.231.185:9092", "topic": "testTopic"}
-
+    kafka_params = {"bootstrap_servers": KAFKA_SERVERS[0], "topic": KAFKA_TOPIC}
     home = SmartHome()
 
     # создание устройств

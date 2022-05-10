@@ -14,7 +14,6 @@ class SmartHome:
         Имя и id должны быть уникальными.
         Объект device относится к классу объектов из модуля smartDevices.py
         """
-        # TODO: добавить проверку на уникальность имени и id нового устройства. и изменить их, если они не уникальны
         if self.dev_dict_id.get(device.dev_id, None) is not None or device.dev_id is None:
             # Generation id
             id_list = list(self.dev_dict_id.keys())

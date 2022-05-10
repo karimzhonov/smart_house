@@ -19,7 +19,7 @@ class FloorHeating(BaseDevice):
             if msg_dict['settings'].get('temperature', None) is not None:
                 self.temperature = msg_dict['settings']['temperature']
 
-    def __generate_data(self):
+    def _generate_data(self):
         """ сгенерировать данные устройства """
         return {"status": self.status,
                 "temperature": self.temperature}

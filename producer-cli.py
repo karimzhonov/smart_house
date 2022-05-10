@@ -26,7 +26,8 @@ def main(dev_id: int = Option(None), cmd: str = Option(None), period: int = Opti
             "blue_intensity": blue_intensity,
             "top_point": top_point,
             "bottom_point": bottom_point,
-            "speed": speed
+            "speed": speed,
+            "signal": signal,
         }
     }
     data = json.dumps(data, indent=4)

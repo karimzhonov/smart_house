@@ -18,7 +18,7 @@ class Ventilation(BaseDevice):
             if msg_dict['settings'].get('speed', None) is not None:
                 self.speed = msg_dict['settings']['speed']
 
-    def __generate_data(self):
+    def _generate_data(self):
         """ сгенерировать данные устройства """
         return {"status": self.status,
                 "speed": self.speed}
