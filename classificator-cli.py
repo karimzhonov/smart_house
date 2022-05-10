@@ -5,14 +5,16 @@ app = Typer()
 
 
 @app.command()
-def main(text: str = Option(None, help='Input text'),
-         pers: float = Option(None, help='Persent errors')):
-    if text is None:
-        print('Run with option --text')
+def main(text: str = Option(None, help='Input text'),):
+    if text is not None:
+        data = clasificator(text)
+        print(data)
         return
-    if pers is None: pers = 0.0
-    data = clasificator(text, pers)
-    print(data)
+
+    while True:
+        text = input('[Person] - ')
+        data = clasificator(text)
+        print(f'[BOT] - {data}')
 
 
 if __name__ == '__main__':

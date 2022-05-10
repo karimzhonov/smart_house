@@ -6,6 +6,7 @@ from transformers import AutoModelForSequenceClassification
 class Model:
     classes_do = ['включи', 'определение', 'управление', 'выключи']
     classes_thing = ['свет', 'музыка', 'кондиционер', 'дверь', 'влажност', 'температура']
+    classes_numbers = [f'{i}' for i in range(101)]
 
     def __init__(self, model_checkpoint='cointegrated/rubert-base-cased-nli-threeway'):
         self.model_checkpoint = model_checkpoint
