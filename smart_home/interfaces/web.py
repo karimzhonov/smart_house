@@ -4,6 +4,8 @@ import streamlit as st
 
 from smart_home.consumer import Consumer
 
+__all__ = ['WebInterface']
+
 
 class WebInterface:
     def __init__(self):
