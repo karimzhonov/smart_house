@@ -41,13 +41,14 @@ class BaseDevice:
                              kafka_servers=self.kafka_params['bootstrap_servers'])
         for msg in cons:
             msg_dict = json.loads(msg.value.decode('utf-8'))
-            if msg_dict.get('id', None) == self.dev_id:
-                self._set_data(msg_dict['data'])
+            if msg_dict.get('dev', None) is not None:
+                if msg_dict['dev'].get('id', None) == self.dev_id:
+                    self._set_data(msg_dict['data'])
 
     def _set_data(self, msg_dict):
-        if msg_dict['cmd'] in ['stop', 'off']:
+        if msg_dict.get('cmd', None) in ['stop', 'off']:
             self.status = "stop"
-        elif msg_dict['cmd'] in ['start', 'on']:
+        elif msg_dict.get('cmd', None) in ['start', 'on']:
             self.status = "work"
 
     def start_generate(self):
@@ -70,22 +71,21 @@ class BaseDevice:
     def send_data(self, producer):
         """ подготовить и отправить данные в kafka """
         data = self._generate_data()
-        info = self._generate_info()
-        msg = self._generate_msg(data, info)
-        self._kafka_send(msg, producer)
+        msg = self.generate_msg(data)
+        self._kafka_send(json.dumps(msg), producer)
 
     def _generate_data(self):
         """ сгенерировать данные устройства """
         return {"status": self.status}
 
-    def _generate_info(self):
+    def generate_info(self):
         """ сгенерировать инфо данные устройства """
         return {"room": self.dev_params.get("room", "none"),
                 "floor": self.dev_params.get("floor", 0)}
 
-    def _generate_msg(self, data, info):
+    def generate_msg(self, data):
         """ сгенерировать сообщение """
-        return json.dumps(OrderedDict({
+        return OrderedDict({
             "dt": datetime.now().strftime("%Y.%m.%d %H:%M:%S.%f")[:-3],
             "msg_type": "data",
             "dev": {
@@ -94,8 +94,8 @@ class BaseDevice:
                 "type": self.device_type
             },
             "data": data,
-            "info": info
-        }))
+            "info": self.generate_info()
+        })
 
     def _kafka_send(self, msg, producer: Producer):
         """ отправка сообщения в kafka """

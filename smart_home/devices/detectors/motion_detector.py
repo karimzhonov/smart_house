@@ -12,7 +12,7 @@ class MotionDetector(BaseDevice):
         self.motion_signal = 0
 
     def _set_data(self, msg_dict):
-        if msg_dict['cmd'] in ['settings']:
+        if msg_dict.get('cmd', None) in ['settings'] and msg_dict.get('settings', None) is not None:
             if msg_dict['settings'].get("period", None) is not None:
                 self.dev_params['period'] = msg_dict['settings']['period']
             if msg_dict['settings'].get('motion_signal', None) is not None:

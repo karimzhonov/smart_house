@@ -20,11 +20,12 @@ def telegram_dialog():
 
 @app.command()
 def main(mode: str = Argument('console', help='console, telegram')):
-    # home.start()
     if mode == 'console':
         console_dialog()
     elif mode == 'telegram':
         telegram_dialog()
+    elif mode == 'home':
+        home.start()
 
 
 if __name__ == '__main__':

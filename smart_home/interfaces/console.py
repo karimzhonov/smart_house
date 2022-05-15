@@ -4,8 +4,8 @@ from smart_home.consumer import Consumer
 
 class ConsoleInterface:
 
-    def __init__(self):
-        self.cons = Consumer()
+    def __init__(self, cons=Consumer()):
+        self.cons = cons
 
     @staticmethod
     def _format(date, dev_type, _id, dev_name, value, room, floor):
@@ -22,6 +22,9 @@ class ConsoleInterface:
         print(self._format('Date', 'Devace type', 'Id', 'Device name', 'Data', 'Room', 'Floor'))
         for msg in self.cons:
             data = json.loads(msg.value.decode('utf-8'))
-            value = [f'{k}={v}' for k, v in data['data'].items()]
-            print(self._format(data['dt'], data["dev"]["type"], data["dev"]["id"], data["dev"]["dev_name"],
-                  f'{", ".join(value)}', data["info"]["room"], f'floor-{data["info"]["floor"]}'))
+            try:
+                value = [f'{k}={v}' for k, v in data['data'].items()]
+                print(self._format(data['dt'], data["dev"]["type"], data["dev"]["id"], data["dev"]["dev_name"],
+                                   f'{", ".join(value)}', data["info"]["room"], f'floor-{data["info"]["floor"]}'))
+            except KeyError:
+                pass

@@ -10,11 +10,11 @@ class DimmerBulb(Bulb):
         self.intensity = 100
 
     def _set_data(self, msg_dict):
-        if msg_dict['cmd'] in ['stop', 'off']:
+        if msg_dict.get('cmd', None) in ['stop', 'off']:
             self.status = "stop"
-        elif msg_dict['cmd'] in ['start', 'on']:
+        elif msg_dict.get('cmd', None) in ['start', 'on']:
             self.status = "work"
-        if msg_dict['cmd'] in ['settings']:
+        if msg_dict.get('cmd', None) in ['settings'] and msg_dict.get('settings', None) is not None:
             if msg_dict['settings'].get('intensity', None) is not None:
                 self.intensity = msg_dict['settings']['intensity']
 

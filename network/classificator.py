@@ -12,7 +12,7 @@ for v in THING_TO_DATA.values():
 model = Model(classes_do=classes_do, classes_thing=classes_thing)
 
 
-def clasificator(text: str, pers_thing: float = 0.3, pers_do: float = 0.1, pers_number: float = 0.1):
+def clasificator(text: str, pers_thing: float = 0.3, pers_do: float = 0.4, pers_number: float = 0.1):
     return_data = {
         'class_thing': None,
         'class_do': None,

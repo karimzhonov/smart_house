@@ -35,3 +35,4 @@ class SmartHome:
 
         for thread in threads:
             thread.start()
+        print('Home started')
