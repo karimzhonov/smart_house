@@ -11,7 +11,7 @@ from config import *
 def get_answer(text: str):
     data = text_to_data(text)
 
-    if data['id'] is None:
+    if data['class_thing'] is None or data['id'] is None:
         return 'Bot not undestand what do you want'
 
     if data['cmd'] is None:

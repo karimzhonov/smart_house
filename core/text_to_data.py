@@ -8,6 +8,10 @@ __all__ = ['text_to_data']
 def text_to_data(text: str):
     text = text.lower()
     data = clasificator(text)
+    data['id'] = None
+    data['cmd'] = None
+    data['settings'] = None
+    data['value'] = None
     for key, llist in THING_TO_DATA.items():
         if data['class_thing'] in llist:
             # Search device
@@ -22,5 +26,4 @@ def text_to_data(text: str):
             else:
                 data['cmd'] = 'settings'
                 data['settings'] = key
-
     return data
