@@ -11,7 +11,7 @@ def text_to_data(text: str):
     data['id'] = None
     data['cmd'] = None
     data['settings'] = None
-    data['value'] = None
+    data['value'] = data['class_number']
     for key, llist in THING_TO_DATA.items():
         if data['class_thing'] in llist:
             # Search device
