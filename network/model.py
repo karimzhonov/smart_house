@@ -4,11 +4,19 @@ from transformers import AutoModelForSequenceClassification
 
 
 class Model:
-    classes_do = ['включи', 'определение', 'управление', 'выключи']
-    classes_thing = ['свет', 'музыка', 'кондиционер', 'дверь', 'влажност', 'температура']
     classes_numbers = [f'{i}' for i in range(101)]
 
-    def __init__(self, model_checkpoint='cointegrated/rubert-base-cased-nli-threeway'):
+    def __init__(self, model_checkpoint='cointegrated/rubert-base-cased-nli-threeway',
+                 classes_do=None,
+                 classes_thing=None,
+                 ):
+        if classes_do is None:
+            classes_do = []
+        if classes_thing is None:
+            classes_thing = []
+
+        self.classes_do = classes_do
+        self.classes_thing = classes_thing
         self.model_checkpoint = model_checkpoint
 
         self.tokenizer = AutoTokenizer.from_pretrained(model_checkpoint)

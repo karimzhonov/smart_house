@@ -1,7 +1,6 @@
 from typer import Typer, Argument
 from core.dialog import get_answer
 from core.model_home import home
-from telegram.loader import dp
 from aiogram import executor
 
 app = Typer()
@@ -14,12 +13,14 @@ def console_dialog():
 
 
 def telegram_dialog():
+    from telegram.loader import dp
+
     executor.start_polling(dp, skip_updates=True)
 
 
 @app.command()
 def main(mode: str = Argument('console', help='console, telegram')):
-    home.start()
+    # home.start()
     if mode == 'console':
         console_dialog()
     elif mode == 'telegram':
