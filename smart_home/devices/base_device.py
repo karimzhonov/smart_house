@@ -61,12 +61,9 @@ class BaseDevice:
         self.status = "work"
         prod = Producer()
         while True:
-            if self.status == "stop":
-                time.sleep(5)
-            elif self.status == "work":
-                if t0 + self.dev_params['period'] < time.time():
-                    self.send_data(prod)
-                    t0 = time.time()
+            if t0 + self.dev_params['period'] < time.time():
+                self.send_data(prod)
+                t0 = time.time()
 
     def send_data(self, producer):
         """ подготовить и отправить данные в kafka """
